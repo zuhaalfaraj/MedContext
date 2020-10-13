@@ -3,6 +3,7 @@ from spacy.util import minibatch, compounding
 import spacy
 import random
 from help import  evaluate
+import os
 class Train_NER:
     def __init__(self,TRAIN_DATA,TEST_DATA,VALID_DATA,):
         self.TEST_DATA=TEST_DATA
@@ -13,7 +14,7 @@ class Train_NER:
         nlp, valid_f1scores, test_f1scores=self.train_spacy(self.TRAIN_DATA, labels, iterations, dropout, display_freq )
         return nlp, valid_f1scores, test_f1scores
 
-    def train_spacy(self,train_data, labels, iterations, dropout=0.5, display_freq=1):
+    def train_spacy(self,train_data, labels, iterations, model_name,dropout=0.5, display_freq=1):
         '''
          Train a spacy NER model, which can be queried against with test data
 
@@ -26,6 +27,7 @@ class Train_NER:
         max_f2a= 0
         valid_f1scores = []
         test_f1scores = []
+        os.mkdir(os.path.join('models',model_name))
         nlp = spacy.load("en_core_web_md")
         # nlp = spacy.blank('en')
         if 'ner' not in nlp.pipe_names:
@@ -78,8 +80,8 @@ class Train_NER:
 
                 if scores["textcat_f"] > max_f2a:
                     max_f2a = scores["textcat_f"]
-                    nlp.to_disk('model')
-                    print('Model of {} f2a has saved'.format(max_f2a))
+                    nlp.to_disk(os.path.join('models',model_name))
+                    print('Model of {} f1 has saved'.format(max_f2a))
         return nlp, valid_f1scores, test_f1scores
 
 
