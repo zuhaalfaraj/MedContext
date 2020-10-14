@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" media="screen"/>
+{% endblock %}
+
+{% block body %}
+
+    <form action="{{ url_for('submit') }}" method="post"><label for="comment">You Report:</label>
+
+    <textarea name="text" class="form-control" rows="5" style="width:600px; height:400px;"></textarea>
+    <input type="submit">
+</form>
+
+ <div class="flex-container">
+<button class="btn btn-primary">
+  <span class="spinner-border spinner-border-sm"></span>
+</button>
+    </div>
+
+
+{% endblock %}

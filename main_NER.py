@@ -72,7 +72,7 @@ if __name__ == '__main__':
     VALID_DATA, _ = load_data_spacy("NERdata/BC5CDR-disease/train_dev.tsv")
 
     main= NameEntitiyRecognitionClinicla()
-    text= main.full_process('sr.jpeg')
+    text= main.full_process('list.png')
     print(text)
     #text= main.img_to_txt("medical-report.jpg")
     main.get_entities('model',text)
