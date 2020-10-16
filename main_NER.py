@@ -23,9 +23,8 @@ class NameEntitiyRecognitionClinicla:
 
     def get_entities(self,model_path,text):
         ner=self.load_model(model_path)
-        test_sentences = [x[0] for x in text]
-        print(test_sentences[0])
-        for x in test_sentences:
+        #test_sentences = [x for x in text]
+        for x in text:
             #print(x)
             doc = ner(x)
             for i in doc.ents:
@@ -72,12 +71,12 @@ if __name__ == '__main__':
     VALID_DATA, _ = load_data_spacy("NERdata/BC5CDR-disease/train_dev.tsv")
 
     main= NameEntitiyRecognitionClinicla()
-    text= main.full_process('list.png')
-    print(text)
+    #text= main.full_process('list.png')
+    #print(text)
     #text= main.img_to_txt("medical-report.jpg")
-    main.get_entities('model',text)
+    #main.get_entities('model',text)
 
-    #print(TEST_DATA[0:15])
+    print(TEST_DATA[0:15])
 
 
 
