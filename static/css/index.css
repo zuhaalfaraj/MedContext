@@ -10,13 +10,6 @@
   margin: 4px 2px;
   cursor: pointer;}
 
-  div {
-  position: absolute;
-  border: 1px solid red;
-  top: 10px;
-  right: 5px;
-}
-
 
 img {
   display: block;

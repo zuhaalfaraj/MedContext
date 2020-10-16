@@ -2,7 +2,7 @@ from flask import Flask, render_template, request,redirect,url_for,flash
 from werkzeug.utils import secure_filename
 import os
 from main_NER import NameEntitiyRecognitionClinicla
-UPLOAD_FOLDER = '/home'
+UPLOAD_FOLDER = ''
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 main=NameEntitiyRecognitionClinicla()
 app = Flask(__name__)
@@ -16,15 +16,21 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-    print(request.form['text'])
-    return 'You entered: {}'.format(request.form['text'])
+    if request.method == 'POST':
+        print(request.form['text'])
+        if request.form['text'] is not None:
+            text = request.form['text'].strip("\n").strip("\r").split("\t")
+            print(text)
+            out= main.get_entities('model',text)
+            return render_template('index.html', out=out)
+
 
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload_file', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -32,6 +38,7 @@ def upload_file():
             flash('No file part')
             return redirect(request.url)
         file = request.files['file']
+        print("i'm here")
         # if user does not select file, browser also
         # submit an empty part without filename
         if file.filename == '':
@@ -39,13 +46,12 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print(file)
-            data= main.full_process(filename)
-            print(data)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            data = main.img_to_txt('list.png')
+            out = main.get_entities("model", data)
 
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+            return render_template('index.html',
+                                    out=out)
 
 if __name__== "__main__":
     app.run(debug=True)

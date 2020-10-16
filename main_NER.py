@@ -23,41 +23,53 @@ class NameEntitiyRecognitionClinicla:
 
     def get_entities(self,model_path,text):
         ner=self.load_model(model_path)
-        #test_sentences = [x for x in text]
+        test_sentences = [x[0] for x in text[:4]]
+        all_ents=[]
         for x in text:
             #print(x)
             doc = ner(x)
-            for i in doc.ents:
-                print(i, i.label_)
-            displacy.render(doc, jupyter=False, style="ent")
+            all_ents.append(doc.ents)
+        all_ents= self.arrange_output(all_ents)
+
+        return all_ents
+
+
 
     def load_text(self,file_path):
 
         file = open(file_path, 'r')
-        sentence,data = [],[]
+        sentence,data = "",[]
         end = 0  # initialize counter to keep track of start and end characters
         for line in file:
             if not line.isspace():
                 print(line)
                 line = line.strip("\n").split("\t")
 
-                sentence.append(line)
+                sentence+=" "+str(line)
 
 
         return sentence
 
-    def img_to_txt(self, img_path):
-        file_name= os.path.join('texts',img_path.split('.')[0]+".txt")
-        file = open(file_name, "w+")
-        file.write("")
+    def arrange_output(self, out):
+        all_out=[]
+        print(out)
+        for ent in out:
+            word=None
+            for x in ent:
+                if x.label_[0] == "B":
+                    if word!=None:
+                        all_out.append(word)
+                    word=str(x)
+                elif x.label_[0] == "I":
+                    word+= " "+str(x)
+        all_out.append(word)
+        return all_out
 
+    def img_to_txt(self, img_path):
         img = cv2.imread(img_path)
         text = pytesseract.image_to_string(img)
-
-        file.write(text)
-        file.close()
-
-        return file_name
+        out = text.strip("\n").split("\t")
+        return out
 
     def full_process(self,img_path):
         text_path= self.img_to_txt(img_path)
@@ -72,11 +84,11 @@ if __name__ == '__main__':
 
     main= NameEntitiyRecognitionClinicla()
     #text= main.full_process('list.png')
-    #print(text)
-    #text= main.img_to_txt("medical-report.jpg")
-    #main.get_entities('model',text)
 
-    print(TEST_DATA[0:15])
+    text= main.img_to_txt("medical-report.jpg")
+    print(text)
+    #print(main.get_entities('model',TEST_DATA))
+
 
 
 

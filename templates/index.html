@@ -3,6 +3,10 @@
 
 {% block head %}
     <link rel="stylesheet" type="text/css" href="static/css/index.css" media="screen"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -10,15 +14,33 @@
 
     <form action="{{ url_for('submit') }}" method="post">
     <textarea name="text" class="form-control" rows="5" style="width:850px; height:400px; margin-left: auto; margin-right: auto;"></textarea>
-        <button class="btn btn-primary active" type="submit"  id="sub" style="position: absolute; right: 700px; top: 850px; height:70px; width:200px;" >Submit</button>
+        <button class="btn btn-primary active" type="submit"  id="sub" style="position: absolute; right: 500px; top: 810px; height:70px; width:200px;" >Submit</button>
 
 </form>
 
-    <form action="{{ url_for('upload_file') }}" method="post"  style="position: absolute; right: 950px; top: 850px; height:68px; width:200px;">
+
+    <form action="{{ url_for('upload_file') }}" method="post"  enctype="multipart/form-data" style="position: absolute; right: 200px; top: 250px; height:68px; width:200px;">
         <label> upload via image</label>
         <input type=file  name="file">
+        <br>
+        <br>
+        <button class="btn btn-primary active" type="submit">Submit image</button>
 </form>
 
+  <table class="table"  style="position: absolute; right: 170px; top: 400px; width:300px;">
+    <thead>
+      <tr>
+        <th>Detected diseases in your report</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for x in out %}
+      <tr class="table-info">
+        <td>{{x}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
 
 
 {% endblock %}
