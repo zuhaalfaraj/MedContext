@@ -9,7 +9,6 @@ from itertools import chain
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
-
 def load_data_spacy(file_path):
     ''' Converts data from:
     word \t label \n word \t label \n \n word \t label
