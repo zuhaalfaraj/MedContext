@@ -16,6 +16,21 @@ Pillow==7.2.0
 pyparsing==2.4.7  
 pytesseract==0.3.6  
 
+## Setup
+- Create an environment
+```
+virtualenv medcontextEnv
+
+source medcontextEnv/bin/activate
+```
+- Install requirements
+```
+pip install requirements.txt
+```
+- Run the app
+```
+python app.py
+```
 
 ## Features
 
