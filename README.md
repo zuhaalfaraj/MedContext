@@ -2,7 +2,7 @@
 <img src="logo.png" width="400">
 
 ## An Overview
-This Flask application is designed to assist anyone who wants to extract diseases' entities from written and/or pictured reports. This could be cosidered as a simple medical report analyser. 
+This Flask application is designed to assist anyone who wants to extract diseases' entities from written and/or pictured reports. This could be considered as a simple medical report analyser.
 
 
 ## Demo
