@@ -1,4 +1,4 @@
-# MedContext: Named Entity Recognition for Medical Text
+# MedContext: Named Entity Recognition in Medical Text
 <img src="logo.png" width="400">
 
 ## An Overview
