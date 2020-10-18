@@ -4,6 +4,16 @@
 ## An Overview
 This Flask application is designed to assist anyone who wants to extract diseases' entities from written and/or pictured reports. This could be cosidered as a simple medical report analyser. 
 
+
+## Demo
+
+- Get Diseases' Entities within Text
+<img src="demo_1.gif" width="700">
+
+
+- Get Diseases' Entities within Image
+<img src="demo_2.gif" width="700">
+
 ## Requirements
 
 spacy==2.3.2  
@@ -32,11 +42,5 @@ pip install requirements.txt
 python app.py
 ```
 
-## Features
-
-- Get Diseases' Entities within Text
-<img src="demo_1.gif" width="700">
-
-
-- Get Diseases' Entities within Image
-<img src="demo_2.gif" width="700">
+## Use Cases 
+<img src="diagram-ner.jpg" width="700">
