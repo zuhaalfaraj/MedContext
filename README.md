@@ -34,9 +34,9 @@ python app.py
 
 ## Features
 
-### Get Diseases' Entities within Text
-<img src="demo_1.gif" width="400">
+- Get Diseases' Entities within Text
+<img src="demo_1.gif" width="700">
 
 
-### Get Diseases' Entities within Image
-<img src="demo_2.gif" width="400">
+- Get Diseases' Entities within Image
+<img src="demo_2.gif" width="700">
